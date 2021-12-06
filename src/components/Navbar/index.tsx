@@ -5,7 +5,7 @@ interface active {
 const Navbar = ({ active }: active) => {
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
-      <div className="container-fluid">
+      <div className="container">
         <a className="navbar-brand" href="/">
           Spotfinder
         </a>

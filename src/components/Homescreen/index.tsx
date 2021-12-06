@@ -12,45 +12,6 @@ const Homescreen: FC = () => {
       
       <div className='container body'>
       {/* {loc?.latitude}, {loc?.longitude}{" "} */}
-      <p>
-        Lots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of textLots of text
-      </p>
-      <p>
-      Lots of textLots of textLots of textLots of text
-      </p>
-      <p>
-      Lots of textLots of textLots of textLots of text
-      </p>
-      <h1>
-        trash
-      </h1>
-      <h1>
-        trash
-      </h1>
-      <h1>
-        trash
-      </h1>
-      <h1>
-        trash
-      </h1>
-      <h1>
-        trash
-      </h1>
-      <h1>
-        trash
-      </h1>
-      <h1>
-        trash
-      </h1>
-      <h1>
-        trash
-      </h1>
-      <h1>
-        trash
-      </h1>
-      <h1>
-        trash
-      </h1>
       </div>
       
     </div>

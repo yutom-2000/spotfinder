@@ -1,7 +1,7 @@
 import "bootstrap/dist/js/bootstrap.bundle"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Homescreen from "./components/Homescreen";
-import Profile from "./components/Profile";
+import Profile from "./components/ProfileScreen";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 
