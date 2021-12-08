@@ -1,0 +1,16 @@
+{
+    "firstName": "Guest",
+    "lastName": "User",
+    "handle": "guest",
+    "profilePicture": "/images/profile/blank-profile.png",
+    "bannerPicture": "/images/profile/banner.png",
+    "bio": "Example Biography",
+    "location": "Boston, MA",
+    "dateOfBirth": "1/1/2000",
+    "dateJoined": "1/1/2000",
+    "followingCount": 0,
+    "followersCount": 0,
+    "spotCount": 0,
+    "_id": "0000"
+  }
+  
