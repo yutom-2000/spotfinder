@@ -1,5 +1,5 @@
 interface active {
-  active: string;
+  active?: string;
 }
 
 const Navbar = ({ active }: active) => {
@@ -56,7 +56,7 @@ const Navbar = ({ active }: active) => {
           </form>
           <a href='/profile' className='ms-2 me-2 '>
           <img className="rounded-circle wd-avatar-image"
-                         src={'images/profile/blank-profile.png'}
+                         src={'https://i.imgur.com/YcP0tik.jpeg'}
                          alt={'...'}
                          width='40px'
                          height='40px'

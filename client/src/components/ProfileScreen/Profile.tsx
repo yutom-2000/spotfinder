@@ -2,6 +2,8 @@ import React, {useEffect} from "react";
 import "../reducers/profileData";
 import {Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { API_URL } from "../../consts";
+import { useNavigate } from "react-router";
 
 const selectProfileData = (state : any) => {
     console.log("state", state);
@@ -10,17 +12,26 @@ const selectProfileData = (state : any) => {
 
 const Profile = () => {
     const profileData = useSelector(selectProfileData);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     //useEffect(() => fetchProfile(dispatch));
+    const logout = () => {
+        fetch(`${API_URL}/logout`, {
+            method: 'POST',
+            credentials: 'include',
+        }).then(res => navigate('/'))
+    }
     return (
         <div>
             <div className={"row"}>
-                <div className={"col-1"}>
-                    <i className={"fas fa-arrow-left align-bottom pl-2"}/>
-                </div>
-                <div className={"col"}>
+                <div className={"col-9"}>
                     <h6 className={"mb-0"}>{`${profileData.firstName} ${profileData.lastName}`}</h6>
                     {`${profileData.spotCount} Spots`}
+                </div>
+                <div className="col-3">
+                    <button className="rounded-pill float-end alert alert-danger pt-1 pb-1" onClick={logout}>
+                        Logout
+                    </button>
                 </div>
             </div>
             <div className={"position-relative bg-dark"}>
