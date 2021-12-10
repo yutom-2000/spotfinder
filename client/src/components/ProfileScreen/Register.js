@@ -6,7 +6,7 @@ import { user } from "./Login";
 import '../Homescreen/index.css';
 
 const Register = () => {
-  const [user, setUser] = useState<user>({});
+  const [user, setUser] = useState({});
   const [warn, setWarn] = useState(false);
   const navigate = useNavigate();
   const register = () => {

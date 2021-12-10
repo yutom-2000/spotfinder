@@ -3,8 +3,17 @@ const userModel = require('./user-model');
 const findAllUsers = () =>
   userModel.find();
 
-const findUserById = (userId) =>
-  userModel.findById(userId);
+const findUserById = (authId, userId) => {
+    console.log(userId);
+    console.log(authId);
+    if (authId === userId) {
+        console.log("authed find");
+        return userModel.findById(userId);
+    } else {
+        console.log("unauthed find")
+        return userModel.findById(userId).select("-secret -birthday");
+    }
+}
 
 const findByUsernameAndPassword = ({username, password}) =>
   userModel.findOne({username, password});

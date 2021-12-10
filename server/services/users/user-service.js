@@ -4,8 +4,21 @@ module.exports = (app) => {
   const findAllUsers = (req, res) =>
     userDao.findAllUsers().then((users) => res.json(users));
 
-  const findUserById = (req, res) =>
-    userDao.findUserById(req.userId).then((user) => res.json(user));
+  const findUserById = (req, res) => {
+      console.log("finding");
+      if (req.session.profile) {
+          console.log("here");
+    return userDao
+      .findUserById(req.session.profile._id, req.params.userId)
+      .then((user) => res.json(user));
+  } else {
+      console.log("there");
+      userDao.findUserById(0, req.params.userId)
+      .then((user) => {
+          console.log(user);
+          res.json(user)});
+  }
+  };
 
   const deleteUser = (req, res) =>
     userDao.deleteUser(req.params.userId).then((status) => res.send(status));

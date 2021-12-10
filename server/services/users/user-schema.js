@@ -3,6 +3,7 @@ const userSchema = mongoose.Schema({
   username: String,
   password: String,
   firstName: String,
+  secret: String,
   lastName: String,
   profilePicture: {
     type: String,

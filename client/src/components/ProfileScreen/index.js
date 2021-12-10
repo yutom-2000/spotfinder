@@ -5,6 +5,7 @@ import "../Homescreen/index.css";
 import Navbar from "../Navbar";
 import Login from "./Login"
 import Profile from "./Profile";
+import EditProfile from "./EditProfile";
 
 const ProfileScreen = () => {
   const [user, setUser] = useState({});
@@ -34,7 +35,7 @@ const ProfileScreen = () => {
       <div className={"body"} style={{ position: "relative" }}>
         <Profile />
         <Routes>
-          <Route path={"/profile/edit"} element={<Profile />} />
+          <Route path={"/profile/edit"} element={<EditProfile />} />
           <Route path={"/profile"} element={<Profile />} />
           <Route path={"/login"} element={<Login />}/>
         </Routes>
