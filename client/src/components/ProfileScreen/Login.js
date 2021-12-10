@@ -4,14 +4,8 @@ import { API_URL } from "../../consts";
 import Navbar from "../Navbar";
 import '../Homescreen/index.css';
 
-export interface user {
-    username?: string,
-    password?: string,
-    verifyPassword?: string,
-  }
-
 const Login = () => {
-  const [user, setUser] = useState<user>({});
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
   const [warn, setWarn] = useState(false);
   const login = () => {

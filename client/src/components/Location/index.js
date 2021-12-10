@@ -1,14 +1,9 @@
 import { useState } from "react";
 
-export interface coords {
-  latitude: number,
-  longitude: number
-};
-
 
 const Location = () => {
-  const [loc, setLoc] = useState<coords>();
-  navigator.geolocation.getCurrentPosition((location: GeolocationPosition) => {
+  const [loc, setLoc] = useState();
+  navigator.geolocation.getCurrentPosition((location) => {
     setLoc({latitude: location.coords.latitude, longitude: location.coords.longitude});
   });
 

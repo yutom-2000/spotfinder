@@ -33,7 +33,10 @@ app.use(
     saveUninitialized: false,
     resave: false,
     secret: "verysecret",
-    cookie: {},
+    cookie: {
+        maxAge: 1000 * 60 * 10 //1 hour
+    },
+    rolling: true,
   })
 );
 

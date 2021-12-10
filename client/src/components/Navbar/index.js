@@ -1,8 +1,25 @@
-interface active {
-  active?: string;
-}
+import { useEffect, useState } from "react";
+import { API_URL } from "../../consts";
+import { useNavigate } from "react-router";
 
-const Navbar = ({ active }: active) => {
+const Navbar = ({ active }) => {
+  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+  const getProfile = () => {
+    fetch(`${API_URL}/profile`, {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((res) => {
+          console.log(res);
+          return res.json()})
+      .then((user) => {
+          console.log(user);
+        setUser(user);
+      })
+      .catch((e) => setUser({}));
+  };
+  useEffect(getProfile, [navigate]);
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
       <div className="container">
@@ -33,14 +50,18 @@ const Navbar = ({ active }: active) => {
             </li>
             <li className="nav-item">
               <a
-                className={"nav-link " + (active === "advanced" ? "active" : "")}
+                className={
+                  "nav-link " + (active === "advanced" ? "active" : "")
+                }
                 href="/search"
               >
                 Advanced Search
               </a>
             </li>
             <li className="nav-item">
-              <a href='/saved' className="nav-link disabled">Saved</a>
+              <a href="/saved" className="nav-link disabled">
+                Saved
+              </a>
             </li>
           </ul>
           <form className="d-flex">
@@ -54,13 +75,14 @@ const Navbar = ({ active }: active) => {
               Search
             </button>
           </form>
-          <a href='/profile' className='ms-2 me-2 '>
-          <img className="rounded-circle wd-avatar-image"
-                         src={'https://i.imgur.com/YcP0tik.jpeg'}
-                         alt={'...'}
-                         width='40px'
-                         height='40px'
-                    />
+          <a href="/profile" className="ms-2 me-2 ">
+            <img
+              className="rounded-circle wd-avatar-image"
+              src={user.profilePicture || "/images/profile/guest.png"}
+              alt={"..."}
+              width="40px"
+              height="40px"
+            />
           </a>
         </div>
       </div>

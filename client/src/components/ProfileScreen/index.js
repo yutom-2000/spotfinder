@@ -14,7 +14,7 @@ const ProfileScreen = () => {
       method: "POST",
       credentials: "include",
     })
-      .then((res: any) => res.json())
+      .then((res) => res.json())
       .then((user) => {
         setUser(user);
       })

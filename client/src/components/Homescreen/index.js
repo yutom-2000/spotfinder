@@ -3,7 +3,7 @@ import location, { coords } from "../Location";
 import Navbar from "../Navbar";
 import './index.css'
 
-const Homescreen: FC = () => {
+const Homescreen = () => {
   //const loc: coords | undefined = location();
   return (
     <div>
