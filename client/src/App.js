@@ -6,16 +6,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/ProfileScreen/Login";
 import Register from "./components/ProfileScreen/Register";
+import EditProfile from "./components/ProfileScreen/EditProfile";
 
 function App() {
   return (
     <BrowserRouter>
-      <div id="root">
+      <div id="root" style={{height: "100vh", background: "LightGray"}}>
         <Routes>
           <Route path={"/"} element={<Homescreen />} />
-          <Route path={"/profile"} element={<Profile />}/>
+          <Route path={"/profile/*"} element={<Profile />}/>
           <Route path={"/login"} element={<Login />} />
           <Route path={"/register"} element={<Register />}/>
+          <Route path={"*"} element={<div>Not Found</div>}/>
         </Routes>
       </div>
     </BrowserRouter>

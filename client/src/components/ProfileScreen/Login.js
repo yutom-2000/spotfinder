@@ -32,10 +32,11 @@ const Login = () => {
   return (
     <div className="container body">
       <Navbar />
-      <h1>Login</h1>
       {warn && (
-        <div className="alert alert-danger">Incorrect username or password</div>
+        <div className="alert alert-danger position-absolute container container-sm">Incorrect username or password</div>
       )}
+      <div className="container container-sm body pt-1 pb-3 rounded bg-light" style={{maxWidth: '500px'}}>
+      <h1>Login</h1>
       <input
         value={user.username}
         onChange={(e) => setUser({ ...user, username: e.target.value })}
@@ -59,6 +60,7 @@ const Login = () => {
       </button>
       </a>
       </div>
+    </div>
     </div>
   );
 };

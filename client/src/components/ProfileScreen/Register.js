@@ -2,18 +2,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { API_URL } from "../../consts";
 import Navbar from "../Navbar";
-import { user } from "./Login";
 import '../Homescreen/index.css';
 
 const Register = () => {
   const [user, setUser] = useState({});
   const [warn, setWarn] = useState(false);
   const navigate = useNavigate();
+
   const register = () => {
-    if (user.password !== user.verifyPassword) {
+    if (!user.password || user.password !== user.verifyPassword) {
       setWarn(true);
     } else {
-        console.log(`{${API_URL}/register}`);
+      user.joinDate = new Date();
       fetch(`${API_URL}/register`, {
         method: "POST",
         body: JSON.stringify(user),
@@ -30,35 +30,67 @@ const Register = () => {
       });
     }
   };
+
   return (
-    <div className="container body">
-      <h1>Register</h1>
-      {warn && <div className="alert alert-danger">Registration unsuccessful. Check that password and verify password are the same </div>}
-      <input
-        value={user.username}
-        onChange={(e) => setUser({ ...user, username: e.target.value })}
-        placeholder="username"
-        className="form-control"
-      />
-      <input
-        value={user.password}
-        onChange={(e) => setUser({ ...user, password: e.target.value })}
-        placeholder="password"
-        type="password"
-        className="form-control"
-      />
-      <input
-        onChange={(e) => setUser({ ...user, verifyPassword: e.target.value })}
-        placeholder="verify password"
-        type="password"
-        className="form-control"
-      />
-      <div className="mt-2">
-      <button className="btn btn-primary" onClick={register}>
-        Register
-      </button>
-      </div>
-      <Navbar />
+      <div className="container">
+          <Navbar/>
+    <div className="container container-sm body pt-1 pb-3 rounded bg-light" style={{maxWidth: '500px'}}>
+      <h1 className="mb-4">Register</h1>
+      {warn && <div className="alert alert-danger mb-4 mt-4">Registration unsuccessful.</div>}
+      <form>
+        <input 
+          value={user.firstName}
+          onChange={(e) => setUser({ ...user, firstName: e.target.value})}
+          placeholder="First name"
+          className="mb-2 form-control"
+        />
+        <input 
+          value={user.lastName}
+          onChange={(e) => setUser({ ...user, lastName: e.target.value})}
+          placeholder="Last name"
+          className="mb-2 form-control"
+        />
+        <div class="input-group mb-2">
+          <span class="input-group-text" id="basic-addon1">Birthday</span>
+          <input
+            value={user.birthday}
+            onChange={(e) => setUser({ ...user, birthday: e.target.value })}
+            type="date"
+            className="form-control"
+          />
+        </div>
+        <input
+          value={user.username}
+          onChange={(e) => setUser({ ...user, username: e.target.value })}
+          placeholder="Username"
+          className="mb-2 form-control"
+        />
+        <input
+          value={user.password}
+          onChange={(e) => setUser({ ...user, password: e.target.value })}
+          placeholder="Password"
+          type="password"
+          className="mb-2 form-control"
+        />
+        <input
+          onChange={(e) => setUser({ ...user, verifyPassword: e.target.value })}
+          placeholder="Verify password"
+          type="password"
+          className="form-control"
+        />
+        <div className="mt-4">
+          <input
+            onClick={(e) => {
+              e.preventDefault();
+              register();
+            }}
+            value="Submit" 
+            className="btn btn-primary"
+          />
+        </div>
+      </form>
+      
+    </div>
     </div>
   );
 };

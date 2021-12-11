@@ -3,8 +3,8 @@ const userSchema = mongoose.Schema({
   username: String,
   password: String,
   firstName: String,
-  secret: String,
   lastName: String,
+  secret: String,
   profilePicture: {
     type: String,
     default: "/images/profile/blank-profile.png",
@@ -13,6 +13,7 @@ const userSchema = mongoose.Schema({
   joinDate: Date,
   birthday: Date,
   bio: String,
+  type: { type: String, enum: ['user', 'admin']},
   spots: [String],
   followers: [String],
   following: [String],

@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from "react-router";
 import { API_URL } from "../../consts";
 import "../Homescreen/index.css";
 import Navbar from "../Navbar";
-import Login from "./Login"
+import Login from "./Login";
 import Profile from "./Profile";
 import EditProfile from "./EditProfile";
 
@@ -22,22 +22,20 @@ const ProfileScreen = () => {
       .catch((e) => navigate("/login"));
   };
   const logout = () => {
-      fetch(`${API_URL}/logout`, {
-          method: 'POST',
-          credentials: 'include'
-      }).then(res => navigate('/'));
-  }
+    fetch(`${API_URL}/logout`, {
+      method: "POST",
+      credentials: "include",
+    }).then((res) => navigate("/"));
+  };
   useEffect(getProfile, [navigate]);
   return (
     <div className="container">
       <Navbar active="profile" />
 
       <div className={"body"} style={{ position: "relative" }}>
-        <Profile />
         <Routes>
-          <Route path={"/profile/edit"} element={<EditProfile />} />
-          <Route path={"/profile"} element={<Profile />} />
-          <Route path={"/login"} element={<Login />}/>
+          <Route path={"/"} element={Profile(user)} />
+          <Route path={"/edit"} element={EditProfile(user)}/>
         </Routes>
       </div>
     </div>

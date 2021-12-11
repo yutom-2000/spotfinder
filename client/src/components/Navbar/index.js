@@ -21,7 +21,7 @@ const Navbar = ({ active }) => {
   };
   useEffect(getProfile, [navigate]);
   return (
-    <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light border-bottom">
       <div className="container">
         <a className="navbar-brand" href="/">
           Spotfinder
