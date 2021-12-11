@@ -15,17 +15,13 @@ const ProfileScreen = () => {
       method: "POST",
       credentials: "include",
     })
-      .then((res) => res.json())
+      .then((res) => {
+          return res.json()})
       .then((user) => {
+          console.log("index", user);
         setUser(user);
       })
       .catch((e) => navigate("/login"));
-  };
-  const logout = () => {
-    fetch(`${API_URL}/logout`, {
-      method: "POST",
-      credentials: "include",
-    }).then((res) => navigate("/"));
   };
   useEffect(getProfile, [navigate]);
   return (

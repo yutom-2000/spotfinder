@@ -10,6 +10,7 @@ const Profile = (user) => {
       credentials: "include",
     }).then((res) => navigate("/"));
   };
+  console.log(user.followers);
   return (
     <div className="container bg-light pt-1 pb-2 rounded">
       <div className={"row"}>
@@ -42,7 +43,8 @@ const Profile = (user) => {
       <div>
         <div className={"row"}>
           <div className={"col offset-9 offset-lg-10"}>
-            <Link to={"/profile/edit"}>
+              <span className="float-end">
+            <Link  to={"/profile/edit"}>
               <button
                 className={"mt-3 me-0 rounded-pill pt-1 pb-1 ps-2 pe-2 mb-3"}
                 style={{
@@ -54,25 +56,26 @@ const Profile = (user) => {
                 Edit profile
               </button>
             </Link>
+            </span>
           </div>
         </div>
       </div>
       <div>
         <h5 className={"mb-0"}>{`${user.firstName} ${user.lastName}`}</h5>
-        {`@${user.handle} #${user._id}`}
+        {`#${user._id}`}
         <p className={"mb-1 mt-2"}>{user.bio}</p>
         <span>
           <i className={"fas fa-globe"} />
-          Birthday: {user.dateOfBirth} &nbsp;&nbsp;&nbsp;
+          Birthday: {String(user.birthday).substring(0, 10)} &nbsp;&nbsp;&nbsp;
           <i className={"fas fa-calendar"} />
-          Join Date: {user.dateJoined}
+          Join Date: {String(user.joinDate).substring(0, 10)}
         </span>
       </div>
       <div>
         <span className={""}>
-          <span className={""}>{user.followingCount}</span> Following
+          <span className={""}>{user.following? user.following.length : 0}</span> Following
           &nbsp;&nbsp;
-          <span>{user.followersCount}</span> Followers
+          <span>{user.followers ? user.followers.length : 0}</span> Followers
         </span>
       </div>
     </div>
