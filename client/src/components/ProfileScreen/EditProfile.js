@@ -1,79 +1,168 @@
-import { Link } from "react-router-dom";
-import { API_URL } from "../../consts";
+import { useState } from "react";
+import { API_URL, IMGUR_API_UPLOAD } from "../../consts";
 import { useNavigate } from "react-router";
 
-const EditProfile = (user) => {
+const EditProfile = (user, setUser) => {
+  const [warn, setWarn] = useState(false);
   const navigate = useNavigate();
-  const logout = () => {
-    fetch(`${API_URL}/logout`, {
-      method: "POST",
-      credentials: "include",
-    }).then((res) => navigate("/"));
+  const [confirm, setConfirm] = useState();
+  const [img, setimg] = useState();
+  const uploadFile = (event) => {
+      console.log("uploading");
+      const data = new FormData();
+      data.append('image', event.target.files[0]);
+
+      fetch(`${IMGUR_API_UPLOAD}`,
+      {
+          "method": "POST",
+          "headers": {
+              "Authorization": "Client-ID 726a5f8440a17e1"
+          },
+          body: data,
+      }).then((res) => res.json()).then((res) => console.log(res));
+  }
+  const save = () => {
+    console.log(user);
+    console.log(confirm);
+    if (
+      !user.password ||
+      user.password !== confirm ||
+      user.role === undefined
+    ) {
+      setWarn(true);
+    } else {
+      user.joinDate = new Date();
+      fetch(`${API_URL}/users`, {
+        method: "PUT",
+        body: JSON.stringify(user),
+        credentials: "include",
+        headers: {
+          "content-type": "application/json",
+        },
+      }).then((status) => {
+        if (status.status === 200) {
+          setWarn(false);
+          navigate("/profile");
+        }
+        console.log("this one?");
+        setWarn(true);
+      });
+    }
   };
+  console.log(user.birthday);
   return (
-    <div className="container bg-light pt-1 pb-2 rounded">
-      <div className={"row"}>
-        <div className={"col-9"}>
-          <h6 className={"mb-0"}>{`${user.firstName} ${user.lastName}`}</h6>
-          {`${user.spotCount} Spots`}
-        </div>
-        <div className="col-3">
-          <button
-            className="rounded-pill float-end alert alert-danger pt-1 pb-1"
-            onClick={logout}
-          >
-            Logout
-          </button>
-        </div>
-      </div>
-      <div className={"position-relative bg-dark"}>
-        <img className={"img-fluid"} src={user.bannerPicture} alt={"..."} />
-      </div>
-      <div className={"position-relative"}>
-        <img
-          src={user.profilePicture}
-          className={"rounded-circle position-absolute ms-2"}
-          width={"125px"}
-          height={"125px"}
-          style={{ top: "-62.5px", border: "5px solid black" }}
-          alt={"..."}
-        />
-      </div>
-      <div>
-        <div className={"row"}>
-          <div className={"col offset-9 offset-lg-10"}>
-            <Link to={"/profile/edit"}>
-              <button
-                className={"mt-3 me-0 rounded-pill pt-1 pb-1 ps-2 pe-2 mb-3"}
-                style={{
-                  background: "black",
-                  border: "1px solid white",
-                  color: "white",
-                }}
-              >
-                Edit profile
-              </button>
-            </Link>
+    <div className="container">
+      <div
+        className="container container-sm pt-1 pb-2 rounded bg-light"
+        style={{ maxWidth: "700px" }}
+      >
+        <h1 className="mb-4">Edit Profile</h1>
+        {warn && (
+          <div className="alert alert-danger container container-sm">
+            Invalid edits
           </div>
-        </div>
-      </div>
-      <div>
-        <h5 className={"mb-0"}>{`${user.firstName} ${user.lastName}`}</h5>
-        {`@${user.handle} #${user._id}`}
-        <p className={"mb-1 mt-2"}>{user.bio}</p>
-        <span>
-          <i className={"fas fa-globe"} />
-          Birthday: {user.dateOfBirth} &nbsp;&nbsp;&nbsp;
-          <i className={"fas fa-calendar"} />
-          Join Date: {user.dateJoined}
-        </span>
-      </div>
-      <div>
-        <span className={""}>
-          <span className={""}>{user.followingCount}</span> Following
-          &nbsp;&nbsp;
-          <span>{user.followersCount}</span> Followers
-        </span>
+        )}
+        <form>
+          <label for="username">Username:</label>
+          <input
+            id="username"
+            value={user.username}
+            readOnly
+            placeholder="Username"
+            className="mb-2 form-control disabled"
+          />
+          <div className="form-group row pb-3">
+            <label className="col-2" for="firstname">
+              First name:
+            </label>
+            <input
+              value={user.firstName}
+              onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+              placeholder="First name"
+              className="col-4 rounded border border-1"
+              id="firstname"
+            />
+            <label className="col-2" for="lastname">
+              Last name:
+            </label>
+            <input
+              value={user.lastName}
+              onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+              placeholder="Last name"
+              className="col-4 rounded border border-1"
+              id="lastname"
+            />
+          </div>
+          <div class="input-group mb-2">
+            <span class="input-group-text" id="basic-addon1">
+              Birthday
+            </span>
+            <input
+              value={String(user.birthday).substring(0, 10)}
+              onChange={(e) => setUser({ ...user, birthday: e.target.value })}
+              type="date"
+              className="form-control"
+            />
+          </div>
+          <div className="row">
+            <div className="col">
+              <label for="password">Password:</label>
+              <input
+                value={user.password}
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                placeholder="Password"
+                type="text"
+                className="mb-2 form-control"
+                id="password"
+              />
+            </div>
+            <div className="col">
+              <label for="confirmpassword">Confirm password:</label>
+              <input
+                onChange={(e) => setConfirm(e.target.value)}
+                value={confirm}
+                placeholder="Verify password"
+                type="text"
+                className="form-control"
+                id="confirmpassword"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <label for="profilepicture">Upload Profile Picture:</label>
+            <div className="col-10">
+              <input
+                id="profilepicture"
+                type={"file"}
+                onChange={uploadFile}
+                accept="image/*"
+                placeholder="Username"
+                className="mb-2 form-control"
+              />
+            </div>
+            {/* <div className="col">
+              <button  className="btn btn-sm btn-secondary">upload</button>
+            </div> */}
+          </div>
+
+          <div className="form-group float-end mt-4">
+            <button className="btn btn-primary bg-danger ps-2 pe-2">
+              Discard changes
+            </button>
+          </div>
+          <div className="mt-4">
+            <div className="form-group">
+              <input
+                onClick={(e) => {
+                  e.preventDefault();
+                  save();
+                }}
+                value="Submit"
+                className="btn btn-primary"
+              />
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );

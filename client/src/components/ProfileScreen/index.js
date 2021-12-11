@@ -11,6 +11,7 @@ const ProfileScreen = () => {
   const [user, setUser] = useState({});
   const navigate = useNavigate();
   const getProfile = () => {
+      console.log("getting profile");
     fetch(`${API_URL}/profile`, {
       method: "POST",
       credentials: "include",
@@ -18,7 +19,6 @@ const ProfileScreen = () => {
       .then((res) => {
           return res.json()})
       .then((user) => {
-          console.log("index", user);
         setUser(user);
       })
       .catch((e) => navigate("/login"));
@@ -31,7 +31,7 @@ const ProfileScreen = () => {
       <div className={"body"} style={{ position: "relative" }}>
         <Routes>
           <Route path={"/"} element={Profile(user)} />
-          <Route path={"/edit"} element={EditProfile(user)}/>
+          <Route path={"/edit"} element={EditProfile(user, setUser)}/>
         </Routes>
       </div>
     </div>

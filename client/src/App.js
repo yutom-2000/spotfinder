@@ -6,12 +6,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/ProfileScreen/Login";
 import Register from "./components/ProfileScreen/Register";
-import EditProfile from "./components/ProfileScreen/EditProfile";
 
 function App() {
   return (
     <BrowserRouter>
-      <div id="root" style={{height: "100vh", background: "LightGray"}}>
+      <div id="root" style={{height: "100vh", background: "LightGray", overflow: "auto"}}>
         <Routes>
           <Route path={"/"} element={<Homescreen />} />
           <Route path={"/profile/*"} element={<Profile />}/>
