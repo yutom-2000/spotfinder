@@ -51,7 +51,7 @@ module.exports = (app) => {
   };
 
   const profile = (req, res) => {
-    return res.json(req.session["profile"]);
+    return userDao.findUserById(req.session.profile._id, req.session.profile._id).then((status) => res.json(status));
   };
 
   const logout = (req, res) => res.send(req.session.destroy());

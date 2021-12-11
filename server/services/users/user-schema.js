@@ -13,9 +13,9 @@ const userSchema = mongoose.Schema({
   joinDate: Date,
   birthday: Date,
   bio: String,
-  type: { type: String, enum: ['user', 'admin']},
+  role: { type: String, enum: ['USER', 'ADMIN']},
   spots: [String],
-  followers: [String],
-  following: [String],
+  followers: [{type: String}],
+  following: [{type: String}],
 }, {collection: 'users'});
 module.exports = userSchema;

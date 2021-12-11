@@ -11,10 +11,7 @@ const multer = require("multer");
 const CONSTANTS = require("./consts");
 
 app.use(function (req, res, next) {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "http://localhost:3000"
-  );
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
@@ -34,7 +31,7 @@ app.use(
     resave: false,
     secret: "verysecret",
     cookie: {
-        maxAge: 1000 * 60 * 10 //1 hour
+      maxAge: 1000 * 60 * 10, //1 hour
     },
     rolling: true,
   })
