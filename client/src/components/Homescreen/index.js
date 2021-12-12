@@ -1,6 +1,3 @@
-import { FC } from "react";
-import location, { coords } from "../Location";
-import { IMGUR_API_UPLOAD } from "../../consts";
 import Navbar from "../Navbar";
 import './index.css'
 import { uploadImage } from "../ProfileScreen/uploadImage";

@@ -1,13 +1,27 @@
-import { useState } from "react";
-import { API_URL, IMGUR_API_UPLOAD } from "../../consts";
+import { useState, useEffect } from "react";
+import { API_URL } from "../../consts";
 import { useNavigate } from "react-router";
 import { uploadImage } from "./uploadImage";
 
-const EditProfile = (user, setUser) => {
+const EditProfile = () => {
+    const [user, setUser] = useState({});
+    const navigate = useNavigate();
+  const getProfile = () => {
+    fetch(`${API_URL}/profile`, {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((user) => {
+        setUser(user);
+      })
+      .catch((e) => navigate("/login"));
+  };
+  useEffect(getProfile, [navigate]);
   const [warn, setWarn] = useState(false);
-  const navigate = useNavigate();
   const [confirm, setConfirm] = useState();
-  const [img, setimg] = useState();
   const uploadProfilePicture = uploadImage(user, setUser, "profilePicture");
   const uploadBannerPicture = uploadImage(user, setUser, "bannerPicture");
   const save = () => {
@@ -127,7 +141,12 @@ const EditProfile = (user, setUser) => {
                 accept="image/*"
                 className="mb-2 form-control"
               />
-              <img className="pb-1" src={user.profilePicture} style={{"max-width": "100%", "max-height": "100%"}}/>
+              <img
+                className="pb-1"
+                src={user.profilePicture}
+                style={{ "max-width": "100%", "max-height": "100%" }}
+                alt="profilePicture"
+              />
             </div>
             <div className="col border border-1 rounded">
               <label for="bannerpicture">Upload Banner Picture:</label>
@@ -138,7 +157,12 @@ const EditProfile = (user, setUser) => {
                 accept="image/*"
                 className="mb-2 form-control"
               />
-              <img className="pb-1" src={user.bannerPicture} style={{"max-width": "100%", "max-height": "100%"}}/>
+              <img
+                className="pb-1"
+                src={user.bannerPicture}
+                style={{ "max-width": "100%", "max-height": "100%" }}
+                alt="bannerPicture"
+              />
             </div>
           </div>
 

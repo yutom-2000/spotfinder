@@ -1,9 +1,25 @@
 import { Link } from "react-router-dom";
 import { API_URL } from "../../consts";
 import { useNavigate } from "react-router";
+import { useState, useEffect } from "react";
 
-const Profile = (user) => {
+const Profile = () => {
+    const [user, setUser] = useState({});
   const navigate = useNavigate();
+  const getProfile = () => {
+    fetch(`${API_URL}/profile`, {
+      method: "POST",
+      credentials: "include",
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((user) => {
+        setUser(user);
+      })
+      .catch((e) => navigate("/login"));
+  };
+  useEffect(getProfile, [navigate]);
   const logout = () => {
     fetch(`${API_URL}/logout`, {
       method: "POST",

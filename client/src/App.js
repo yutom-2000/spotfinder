@@ -4,8 +4,8 @@ import Homescreen from "./components/Homescreen";
 import Profile from "./components/ProfileScreen";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Login from "./components/ProfileScreen/Login";
-import Register from "./components/ProfileScreen/Register";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
 function App() {
   return (
