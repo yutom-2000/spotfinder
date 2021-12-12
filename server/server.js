@@ -4,14 +4,11 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-const fs = require("fs");
-const path = require("path");
-const multer = require("multer");
-
 const CONSTANTS = require("./consts");
 
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"

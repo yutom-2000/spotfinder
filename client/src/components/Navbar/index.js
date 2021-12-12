@@ -11,13 +11,12 @@ const Navbar = ({ active }) => {
       credentials: "include",
     })
       .then((res) => {
-          console.log(res);
           return res.json()})
       .then((user) => {
-          console.log(user);
         setUser(user);
       })
-      .catch((e) => setUser({}));
+      .catch((e) =>  {
+      setUser({})});
   };
   useEffect(getProfile, [navigate]);
   return (

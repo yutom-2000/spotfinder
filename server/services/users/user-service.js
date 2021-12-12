@@ -5,19 +5,19 @@ module.exports = (app) => {
     userDao.findAllUsers().then((users) => res.json(users));
 
   const findUserById = (req, res) => {
-      console.log("finding");
-      if (req.session.profile) {
-          console.log("here");
-    return userDao
-      .findUserById(req.session.profile._id, req.params.userId)
-      .then((user) => res.json(user));
-  } else {
+    console.log("finding");
+    if (req.session.profile) {
+      console.log("here");
+      return userDao
+        .findUserById(req.session.profile._id, req.params.userId)
+        .then((user) => res.json(user));
+    } else {
       console.log("there");
-      userDao.findUserById(0, req.params.userId)
-      .then((user) => {
-          console.log(user);
-          res.json(user)});
-  }
+      userDao.findUserById(0, req.params.userId).then((user) => {
+        console.log(user);
+        res.json(user);
+      });
+    }
   };
 
   const deleteUser = (req, res) =>
@@ -51,7 +51,11 @@ module.exports = (app) => {
   };
 
   const profile = (req, res) => {
-    return userDao.findUserById(req.session.profile._id, req.session.profile._id).then((status) => res.json(status));
+    if (req.session.profile) {
+      return userDao
+        .findUserById(req.session.profile._id, req.session.profile._id)
+        .then((status) => res.json(status));
+    } else res.json();
   };
 
   const logout = (req, res) => res.send(req.session.destroy());

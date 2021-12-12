@@ -1,26 +1,15 @@
 import { useState } from "react";
 import { API_URL, IMGUR_API_UPLOAD } from "../../consts";
 import { useNavigate } from "react-router";
+import { uploadImage } from "./uploadImage";
 
 const EditProfile = (user, setUser) => {
   const [warn, setWarn] = useState(false);
   const navigate = useNavigate();
   const [confirm, setConfirm] = useState();
   const [img, setimg] = useState();
-  const uploadFile = (event) => {
-      console.log("uploading");
-      const data = new FormData();
-      data.append('image', event.target.files[0]);
-
-      fetch(`${IMGUR_API_UPLOAD}`,
-      {
-          "method": "POST",
-          "headers": {
-              "Authorization": "Client-ID 726a5f8440a17e1"
-          },
-          body: data,
-      }).then((res) => res.json()).then((res) => console.log(res));
-  }
+  const uploadProfilePicture = uploadImage(user, setUser, "profilePicture");
+  const uploadBannerPicture = uploadImage(user, setUser, "bannerPicture");
   const save = () => {
     console.log(user);
     console.log(confirm);
@@ -129,20 +118,28 @@ const EditProfile = (user, setUser) => {
             </div>
           </div>
           <div className="row">
-            <label for="profilepicture">Upload Profile Picture:</label>
-            <div className="col-10">
+            <div className="col border border-1 rounded">
+              <label for="profilepicture">Upload Profile Picture:</label>
               <input
                 id="profilepicture"
                 type={"file"}
-                onChange={uploadFile}
+                onChange={uploadProfilePicture}
                 accept="image/*"
-                placeholder="Username"
                 className="mb-2 form-control"
               />
+              <img className="pb-1" src={user.profilePicture} style={{"max-width": "100%", "max-height": "100%"}}/>
             </div>
-            {/* <div className="col">
-              <button  className="btn btn-sm btn-secondary">upload</button>
-            </div> */}
+            <div className="col border border-1 rounded">
+              <label for="bannerpicture">Upload Banner Picture:</label>
+              <input
+                id="bannerpicture"
+                type={"file"}
+                onChange={uploadBannerPicture}
+                accept="image/*"
+                className="mb-2 form-control"
+              />
+              <img className="pb-1" src={user.bannerPicture} style={{"max-width": "100%", "max-height": "100%"}}/>
+            </div>
           </div>
 
           <div className="form-group float-end mt-4">
