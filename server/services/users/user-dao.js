@@ -1,39 +1,50 @@
-const userModel = require('./user-model');
+const userModel = require("./user-model");
 
-const findAllUsers = () =>
-  userModel.find();
+const findAllUsers = () => userModel.find();
 
 const findUserById = (authId, userId) => {
-    console.log(userId);
-    console.log(authId);
-    if (authId === userId) {
-        console.log("authed find");
-        return userModel.findById(userId);
-    } else {
-        console.log("unauthed find")
-        return userModel.findById(userId).select("-secret -birthday");
-    }
-}
+  console.log(userId);
+  console.log(authId);
+  if (authId === userId) {
+    console.log("authed find");
+    return userModel.findById(userId);
+  } else {
+    console.log("unauthed find");
+    return userModel.findById(userId).select("-secret -birthday");
+  }
+};
 
-const findByUsernameAndPassword = ({username, password}) =>
-  userModel.findOne({username, password});
+const findByUsernameAndPassword = ({ username, password }) =>
+  userModel.findOne({ username, password });
 
-const findByUsername = ({username}) =>
-  userModel.findOne({username});
+const findByUsername = ({ username }) => userModel.findOne({ username });
 
-const createUser = (user) =>
-  userModel.create(user);
+const createUser = (user) => userModel.create(user);
 
 const updateUser = (user) =>
-  userModel.updateOne({_id: user._id}, {
-    $set: user
-  });
+  userModel.updateOne(
+    { _id: user._id },
+    {
+      $set: user,
+    }
+  );
 
-const deleteUser = (userId) =>
-  userModel.deleteOne({_id: userId});
+const deleteUser = (userId) => userModel.deleteOne({ _id: userId });
+
+const follow = (profileId, userId) => 
+  userModel
+    .updateOne({ _id: profileId }, { $push: { following: userId } })
+    .then((res) =>
+      userModel.updateOne({ _id: userId }, { $push: { followers: profileId } })
+    )
 
 module.exports = {
-  findByUsername, findAllUsers, findUserById,
+  follow,
+  findByUsername,
+  findAllUsers,
+  findUserById,
   findByUsernameAndPassword,
-  createUser, updateUser, deleteUser
+  createUser,
+  updateUser,
+  deleteUser,
 };

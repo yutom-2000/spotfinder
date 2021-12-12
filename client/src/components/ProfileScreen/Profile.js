@@ -96,12 +96,6 @@ const Profile = () => {
       </div>
     </div>
   );
-
-  // return(<div>
-  //     <div className={"row"}>
-
-  //     </div>
-  // </div>)
 };
 
 export default Profile;

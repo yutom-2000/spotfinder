@@ -58,6 +58,10 @@ module.exports = (app) => {
     } else res.json();
   };
 
+  const follow = (req, res) => {
+      return userDao.follow(req.session.profile._id, req.params.userId).then(status => res.json(status));
+  }
+
   const logout = (req, res) => res.send(req.session.destroy());
 
   app.post("/api/login", login);
@@ -68,4 +72,5 @@ module.exports = (app) => {
   app.delete("/api/users/:userId", deleteUser);
   app.get("/api/users", findAllUsers);
   app.get("/api/users/:userId", findUserById);
+  app.post("/api/users/:userId/follow", follow);
 };
