@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
   birthday: Date,
   bio: String,
   role: { type: String, enum: ['USER', 'ADMIN']},
-  spots: [String],
+  spots: [{type: String}],
   followers: [{type: String}],
   following: [{type: String}],
 }, {collection: 'users'});

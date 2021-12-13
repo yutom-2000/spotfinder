@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 
 const Profile = () => {
-    const [user, setUser] = useState({});
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
   const getProfile = () => {
     fetch(`${API_URL}/profile`, {
@@ -59,19 +59,19 @@ const Profile = () => {
       <div>
         <div className={"row"}>
           <div className={"col offset-9 offset-lg-10"}>
-              <span className="float-end">
-            <Link  to={"/profile/edit"}>
-              <button
-                className={"mt-3 me-0 rounded-pill pt-1 pb-1 ps-2 pe-2 mb-3"}
-                style={{
-                  background: "black",
-                  border: "1px solid white",
-                  color: "white",
-                }}
-              >
-                Edit profile
-              </button>
-            </Link>
+            <span className="float-end">
+              <Link to={"/profile/edit"}>
+                <button
+                  className={"mt-3 me-0 rounded-pill pt-1 pb-1 ps-2 pe-2 mb-3"}
+                  style={{
+                    background: "black",
+                    border: "1px solid white",
+                    color: "white",
+                  }}
+                >
+                  Edit profile
+                </button>
+              </Link>
             </span>
           </div>
         </div>
@@ -89,8 +89,10 @@ const Profile = () => {
       </div>
       <div>
         <span className={""}>
-          <span className={""}>{user.following? user.following.length : 0}</span> Following
-          &nbsp;&nbsp;
+          <span className={""}>
+            {user.following ? user.following.length : 0}
+          </span>{" "}
+          Following &nbsp;&nbsp;
           <span>{user.followers ? user.followers.length : 0}</span> Followers
         </span>
       </div>

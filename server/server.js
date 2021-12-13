@@ -38,6 +38,7 @@ mongoose.connect(CONSTANTS.MONGODB_URL);
 
 require("./services/users/user-service")(app);
 require("./services/images/storage-service")(app);
+require("./services/spots/spot-service")(app);
 
 console.log(process.env.NODE_ENV);
 console.log(CONSTANTS.MONGODB_URL);

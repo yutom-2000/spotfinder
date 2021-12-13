@@ -31,12 +31,15 @@ const updateUser = (user) =>
 
 const deleteUser = (userId) => userModel.deleteOne({ _id: userId });
 
-const follow = (profileId, userId) => 
+const follow = (profileId, userId) =>
   userModel
     .updateOne({ _id: profileId }, { $push: { following: userId } })
     .then((res) =>
       userModel.updateOne({ _id: userId }, { $push: { followers: profileId } })
-    )
+    );
+
+const saveSpot = (profileId, spotId) =>
+  userModel.updateOne({ _id: profileId }, { $push: { spots: spotId } });
 
 module.exports = {
   follow,
@@ -47,4 +50,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  saveSpot,
 };

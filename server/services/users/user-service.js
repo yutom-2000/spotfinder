@@ -6,18 +6,12 @@ module.exports = (app) => {
 
   const findUserById = (req, res) => {
     console.log("finding");
-    if (req.session.profile) {
-      console.log("here");
-      return userDao
-        .findUserById(req.session.profile._id, req.params.userId)
-        .then((user) => res.json(user));
-    } else {
-      console.log("there");
-      userDao.findUserById(0, req.params.userId).then((user) => {
-        console.log(user);
-        res.json(user);
-      });
-    }
+    userDao
+      .findUserById(
+        req.session.profile ? req.session.profile._id : 0,
+        req.params.userId
+      )
+      .then((user) => res.json(user));
   };
 
   const deleteUser = (req, res) =>
@@ -59,8 +53,15 @@ module.exports = (app) => {
   };
 
   const follow = (req, res) => {
-      return userDao.follow(req.session.profile._id, req.params.userId).then(status => res.json(status));
-  }
+    return userDao
+      .follow(req.session.profile._id, req.params.userId)
+      .then((status) => res.json(status));
+  };
+
+  const saveSpot = (req, res) =>
+    userDao
+      .saveSpot(req.session.profile._id, req.params.spotId)
+      .then((status) => res.send(status));
 
   const logout = (req, res) => res.send(req.session.destroy());
 
@@ -73,4 +74,5 @@ module.exports = (app) => {
   app.get("/api/users", findAllUsers);
   app.get("/api/users/:userId", findUserById);
   app.post("/api/users/:userId/follow", follow);
+  app.post("/api/users/:spotId", saveSpot);
 };
