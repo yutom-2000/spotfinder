@@ -4,7 +4,6 @@ import { useNavigate } from "react-router";
 
 const Navbar = ({ active }) => {
   const [user, setUser] = useState({});
-  const navigate = useNavigate();
   const getProfile = () => {
     fetch(`${API_URL}/profile`, {
       method: "POST",
@@ -18,7 +17,7 @@ const Navbar = ({ active }) => {
       .catch((e) =>  {
       setUser({})});
   };
-  useEffect(getProfile, [navigate]);
+  useEffect(getProfile, []);
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light border-bottom">
       <div className="container">

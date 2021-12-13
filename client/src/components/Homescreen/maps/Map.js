@@ -1,22 +1,17 @@
-import React from "react";
 import GoogleMapReact from "google-map-react";
 import { GOOGLE_API_KEY } from "../../../consts";
-import CreateSpot from "../CreateSpot";
 
-const Map = (coords, isLogIn) => {
+const Map = (coords, setLoc) => {
   console.log(coords);
-  const onClick = ({ x, y, lat, lng, event }) =>
-    console.log(x, y, lat, lng, event);
   return (
-    <div className="row">
-      <div className="col-8">
         <div style={{ height: "85vh", width: "100%" }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: GOOGLE_API_KEY }}
             key={GOOGLE_API_KEY}
             center={coords}
             defaultZoom={13}
-            onChange={(e) => console.log("change", e.center)}
+            onChange={(e) => {console.log("change", e.center)
+        setLoc(e.center)}}
           >
             <div
               className="rounded bg-danger"
@@ -29,11 +24,6 @@ const Map = (coords, isLogIn) => {
             </button>
           </GoogleMapReact>
         </div>
-      </div>
-      <div className="col">
-        {isLogIn ? <CreateSpot/> : "no"}
-      </div>
-    </div>
   );
 };
 
