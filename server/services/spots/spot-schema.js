@@ -6,7 +6,7 @@ const spotSchema = mongoose.Schema(
     type: { type: String, enum: ["food", "entertainment", "park"] },
     author: String,
     description: String,
-    location: [Number, Number],
+    coords: [Number, Number],
   },
   { collection: "spots" }
 );

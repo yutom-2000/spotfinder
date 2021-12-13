@@ -11,8 +11,9 @@ module.exports = (app) => {
   const deleteSpot = (req, res) =>
     spotDao.deleteSpot(req.params.spotId).then((status) => res.send(status));
 
-  const createSpot = (req, res) =>
-    spotDao.createSpot(req.body).then((spot) => res.json(spot));
+  const createSpot = (req, res) => {
+      console.log(req.body);
+    spotDao.createSpot({...req.body, author: req.session.profile._id}).then((spot) => res.json(spot));}
 
   app.get("/api/spots", findAllSpots);
   app.get("/api/spots/:spotId", findSpotById);
