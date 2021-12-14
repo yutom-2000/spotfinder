@@ -10,6 +10,7 @@ import Spots from "./components/Spots";
 import BookMarked from "./components/Bookmarked";
 import Error from "./components/Error";
 import Search from "./components/Search";
+import Privacy from "./components/Privacy";
 
 function App() {
   return (
@@ -24,10 +25,13 @@ function App() {
           <Route path={"/spots/*"} element={<Spots />}/>
           <Route path={"profile/saved"} element={<BookMarked/>}/>
           <Route path={"/error"} element={<Error error={"User not found"}/>} />
+          <Route path={"/privacy"} element={<Privacy />} />
           <Route path={"*"} element={<div>Not Found</div>}/>
           
         </Routes>
+        
       </div>
+      <div className="position-absolute bg-dark" style={{"width": "100%", "bottom": "0px"}}>hello</div>
     </BrowserRouter>
   );
 }
