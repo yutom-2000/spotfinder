@@ -31,7 +31,6 @@ function App() {
         </Routes>
         
       </div>
-      <div className="position-absolute bg-dark" style={{"width": "100%", "bottom": "0px"}}>hello</div>
     </BrowserRouter>
   );
 }

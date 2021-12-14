@@ -57,7 +57,6 @@ const Search = (props) => {
                         <a href={`/search?` + constructQuery()}>
                           <button className="btn btn-primary">Search</button>
                         </a>
-                        {/* <button onClick={(e) => constructQuery()}>click</button> */}
                       </div>
                     </div>
                   </div>

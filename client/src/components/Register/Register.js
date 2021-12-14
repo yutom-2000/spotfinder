@@ -10,8 +10,12 @@ const Register = () => {
   const navigate = useNavigate();
 
   const register = () => {
-      console.log(user);
-    if (!user.password || user.password !== user.verifyPassword || user.role === undefined) {
+    console.log(user);
+    if (
+      !user.password ||
+      user.password !== user.verifyPassword ||
+      user.role === undefined
+    ) {
       setWarn(true);
     } else {
       user.joinDate = new Date();
@@ -39,7 +43,14 @@ const Register = () => {
         className="container container-sm body pt-1 pb-3 rounded bg-light"
         style={{ maxWidth: "500px" }}
       >
-        <h1 className="mb-4">Register</h1>
+        <div className="row">
+          <div className="col">
+            <h1 className="mb-4">Register</h1>
+          </div>
+          <div className="col">
+            <a className="link-dark mt-3" href="/privacy">View our privacy policy</a>
+          </div>
+        </div>
         {warn && (
           <div className="alert alert-danger mb-4 mt-4">
             Registration unsuccessful.

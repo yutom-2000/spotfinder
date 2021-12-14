@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 
 const Navbar = ({ active }) => {
   const [user, setUser] = useState({});
+  const [name, setName] = useState();
   const getProfile = () => {
     fetch(`${API_URL}/profile`, {
       method: "POST",
@@ -18,6 +19,15 @@ const Navbar = ({ active }) => {
       setUser(undefined)});
   };
   useEffect(getProfile, []);
+
+  const constructQuery = () => {
+    let params = new URLSearchParams();
+    console.log(name);
+    name && (name !== "") ? params.append("name", name) : params = params;
+    console.log(params.toString());
+    console.log(`/search?${params.toString()}`);
+    return `/search?${params.toString()}`
+  };
   return (
     <nav className="navbar navbar-expand-lg fixed-top navbar-light bg-light border-bottom">
       <div className="container">
@@ -53,7 +63,7 @@ const Navbar = ({ active }) => {
                 }
                 href="/search"
               >
-                Advanced Search
+                Search
               </a>
             </li>
             <li className="nav-item">
@@ -63,15 +73,18 @@ const Navbar = ({ active }) => {
             </li>
           </ul>
           <form className="d-flex">
-            <input
+            {/* <input
               className="form-control me-2"
               type="search"
               placeholder="Quick Search"
               aria-label="Search"
-            />
+              onChange={(e) => setName(e.target.value)}
+            /> */}
+            {/* <a href={`/search?${constructQuery()}`}>
             <button className="btn btn-outline-success" type="submit">
               Search
             </button>
+            </a> */}
           </form>
           <a href="/profile" className="ms-2 me-2 ">
             <img
