@@ -67,7 +67,7 @@ const Details = () => {
               <hr/>
               <h3>Description</h3>
               <p>
-              {`${spot && spot.desc ? spot.desc : "No Description"}`}
+              {`${spot && spot.description ? spot.description : "No Description"}`}
               </p>
           </div>
       </div>

@@ -33,6 +33,7 @@ const Homescreen = () => {
   useEffect(getProfile, [navigate]);
 
   //const loc: coords | undefined = location();
+  console.log(location);
   return (
     <div>
       <Navbar active={"home"} />

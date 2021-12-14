@@ -34,6 +34,9 @@ const ProfileById = () => {
       .then((user) => {
         console.log(user);
         setUser(user);
+        if (user === null) {
+            navigate("/error")
+        }
       });
   };
 

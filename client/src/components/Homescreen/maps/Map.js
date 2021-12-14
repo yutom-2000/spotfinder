@@ -1,8 +1,18 @@
 import GoogleMapReact from "google-map-react";
-import { GOOGLE_API_KEY } from "../../../consts";
+import { useEffect, useState } from "react";
+import { API_URL, GOOGLE_API_KEY } from "../../../consts";
+import Spot from "./Spot";
 
 const Map = (coords, setLoc) => {
   console.log(coords);
+  const [spots, setSpots] = useState([]);
+  const getSpots = () => {
+      fetch(`${API_URL}/spots`, {
+          method: "GET",
+          credentials: "include",
+      }).then((res) => res.json()).then((spots) => setSpots(spots));
+  }
+  useEffect(getSpots, [coords]);
   return (
         <div style={{ height: "85vh", width: "100%" }}>
           <GoogleMapReact
@@ -19,9 +29,11 @@ const Map = (coords, setLoc) => {
             >
               .
             </div>
-            <button lat={42} lng={-71} center={[42, -71]}>
+            <button lat={42} lng={-71}>
               hello
             </button>
+            {spots.map((spot) => {
+            return <Spot lat={spot.coords[0]} lng={spot.coords[1]} spot={spot} />})}
           </GoogleMapReact>
         </div>
   );

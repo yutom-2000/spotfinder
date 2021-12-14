@@ -4,13 +4,14 @@ import { API_URL } from "../../../consts";
 import { uploadImage } from "../../ProfileScreen/uploadImage";
 
 const CreateSpot = (props) => {
-  console.log(props.active);
-  const [spot, setSpot] = useState(props.coords ? {coords: [props.coords.latitude, props.coords.longitude]} : undefined);
+  console.log("create spot", props.coords);
+  const [spot, setSpot] = useState();
+  console.log(spot);
   const [warn, setWarn] = useState(false);
   const uploadSpotPicture = uploadImage(spot, setSpot, "image");
   const registerSpot = () => {
     if (spot && spot.name && spot.description && spot.type && props.coords) {
-        const b = {...spot, coords: props.coords};
+        const b = {...spot, coords: [props.coords.lat, props.coords.lng]};
         console.log(b);
           fetch(`${API_URL}/spots`, {
             method: "POST",
