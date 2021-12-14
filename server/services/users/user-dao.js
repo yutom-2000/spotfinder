@@ -41,6 +41,11 @@ const follow = (profileId, userId) =>
 const saveSpot = (profileId, spotId) =>
   userModel.updateOne({ _id: profileId }, { $push: { spots: spotId } });
 
+  const findSavedSpots = (profileId) => {
+      console.log("test");
+  return userModel.findById(profileId).populate("spots")
+  }
+
 module.exports = {
   follow,
   findByUsername,
@@ -51,4 +56,5 @@ module.exports = {
   updateUser,
   deleteUser,
   saveSpot,
+  findSavedSpots,
 };

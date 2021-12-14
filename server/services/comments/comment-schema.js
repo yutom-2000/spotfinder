@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
+const UserModel = require("../users/user-model");
 const commentSchema = mongoose.Schema(
   {
-    author: String,
+    author: {type: mongoose.SchemaTypes.ObjectId, ref: "UserModel"},
     spot: String,
     comment: String,
     username: String,

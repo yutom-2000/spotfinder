@@ -4,8 +4,23 @@ import { useNavigate } from "react-router";
 import { uploadImage } from "./uploadImage";
 
 const EditProfile = () => {
-    const [user, setUser] = useState({});
-    const navigate = useNavigate();
+  const [user, setUser] = useState({});
+  const navigate = useNavigate();
+  const deleteProfile = () => {
+    console.log("delete");
+      //if logged in to this account, log out first
+      fetch(`${API_URL}/logout`, {
+        method: "POST",
+        credentials: "include",
+      }).then(() =>
+    fetch(`${API_URL}/users/${user._id}`, {
+      method: "DELETE",
+      credentials: "include",
+    }).then((_) => {
+      console.log("deleted by API");
+      navigate("/");
+    }));
+  };
   const getProfile = () => {
     fetch(`${API_URL}/profile`, {
       method: "POST",
@@ -17,7 +32,7 @@ const EditProfile = () => {
       .then((user) => {
         setUser(user);
       })
-      .catch((e) => navigate("/login"));
+      .catch((e) => navigate("/"));
   };
   useEffect(getProfile, [navigate]);
   const [warn, setWarn] = useState(false);
@@ -167,6 +182,7 @@ const EditProfile = () => {
           </div>
 
           <div className="form-group float-end mt-4">
+              <button onClick={deleteProfile} className="btn btn-danger me-2">Delete Profile</button>
             <button className="btn btn-primary bg-danger ps-2 pe-2">
               Discard changes
             </button>

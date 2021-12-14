@@ -32,6 +32,7 @@ module.exports = (app) => {
   };
 
   const register = (req, res) => {
+      console.log(req.body);
     userDao.findByUsername(req.body).then((user) => {
       if (user) {
         res.sendStatus(404);
@@ -65,6 +66,10 @@ module.exports = (app) => {
 
   const logout = (req, res) => res.send(req.session.destroy());
 
+  const findSavedSpots = (req, res) => {
+      userDao.findSavedSpots(req.session.profile._id).then((user) => res.json(user));
+  }
+
   app.post("/api/login", login);
   app.post("/api/register", register);
   app.post("/api/profile", profile);
@@ -72,7 +77,9 @@ module.exports = (app) => {
   app.put("/api/users", updateUser);
   app.delete("/api/users/:userId", deleteUser);
   app.get("/api/users", findAllUsers);
+  app.get("/api/profile/saved", findSavedSpots);
   app.get("/api/users/:userId", findUserById);
   app.post("/api/users/:userId/follow", follow);
-  app.post("/api/users/:spotId", saveSpot);
+  app.put("/api/profile/saveSpot/:spotId", saveSpot);
+  
 };

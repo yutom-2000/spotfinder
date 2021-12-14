@@ -17,10 +17,10 @@ const Details = () => {
       });
   }
   const bookmarkSpot = () => {
-      fetch(`${API_URL}/profile/save/${spotId}`, {
+      fetch(`${API_URL}/profile/saveSpot/${spotId}`, {
           method: "PUT",
           credentials: "include",
-      }).then((res) => res.json()).then((profile) => setProfile(profile))
+      }).then((res) => res.json()).then((profile) => setProfile(profile)).then((_) => navigate("/profile/saved"))
   };
   const getProfile = () => {
     fetch(`${API_URL}/profile`, {
@@ -53,7 +53,7 @@ const Details = () => {
   };
   console.log(spot);
   useEffect(init, []);
-  return (
+  return (<>
     <div className="p-3 bg-light rounded position-relative"> 
      <h2 className="text-success">{`${spot && spot.type}`}</h2>
       
@@ -77,10 +77,11 @@ const Details = () => {
           Bookmark
       </button>
       </span>
-      <div>
-          <CommentList spotId={spotId}/>
-      </div>
     </div>
+    <div>
+    <CommentList spotId={spotId}/>
+</div>
+</>
   );
 };
 

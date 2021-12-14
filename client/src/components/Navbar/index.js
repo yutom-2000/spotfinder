@@ -57,7 +57,7 @@ const Navbar = ({ active }) => {
               </a>
             </li>
             <li className="nav-item">
-              <a href="/saved" className={`nav-link ${user ? "" : "disabled"}`}>
+              <a href="/profile/saved" className={`nav-link ${user ? "" : "disabled"}`}>
                 Saved
               </a>
             </li>
