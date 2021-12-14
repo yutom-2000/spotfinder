@@ -9,7 +9,7 @@ const CreateSpot = (props) => {
   const [warn, setWarn] = useState(false);
   const uploadSpotPicture = uploadImage(spot, setSpot, "image");
   const registerSpot = () => {
-    if (spot && spot.name && spot.desc && spot.type && props.coords) {
+    if (spot && spot.name && spot.description && spot.type && props.coords) {
         const b = {...spot, coords: props.coords};
         console.log(b);
           fetch(`${API_URL}/spots`, {
@@ -39,19 +39,22 @@ const CreateSpot = (props) => {
               placeholder="Place Name"
               value={spot && spot.name ? spot.name : ""}
               onChange={(e) => setSpot({ ...spot, name: e.target.value })}
+              disabled={!props.active}
             ></input>
             <label for="desc">Description</label>
             <textarea
+            disabled={!props.active}
               rows={5}
               id="desc"
               className="form-control"
               type={"text"}
               placeholder="Description"
-              value={spot && spot.desc ? spot.desc : ""}
-              onChange={(e) => setSpot({ ...spot, desc: e.target.value })}
+              value={spot && spot.description ? spot.description : ""}
+              onChange={(e) => setSpot({ ...spot, description: e.target.value })}
             ></textarea>
             <label for="spotPicture">Picture</label>
             <input
+            disabled={!props.active}
                 id="spotPicture"
                 type={"file"}
                 onChange={uploadSpotPicture}
@@ -68,6 +71,7 @@ const CreateSpot = (props) => {
               >
                 <div>
                   <input
+                  disabled={!props.active}
                     className="form-check-input"
                     id={"food"}
                     type={"radio"}
@@ -79,6 +83,7 @@ const CreateSpot = (props) => {
                 </div>
                 <div>
                   <input
+                  disabled={!props.active}
                     className="form-check-input"
                     id={"entertainment"}
                     type={"radio"}
@@ -90,6 +95,7 @@ const CreateSpot = (props) => {
                 </div>
                 <div>
                   <input
+                  disabled={!props.active}
                     className="form-check-input"
                     id={"park"}
                     type={"radio"}
@@ -101,7 +107,7 @@ const CreateSpot = (props) => {
                 </div>
               </div>
               <div className="col">
-                <button onClick={registerSpot} className="mt-4 btn btn-primary">
+                <button disabled={!props.active} onClick={registerSpot} className="mt-4 btn btn-primary">
                   Save
                 </button>
               </div>

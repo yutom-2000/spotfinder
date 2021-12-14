@@ -15,7 +15,7 @@ const Navbar = ({ active }) => {
         setUser(user);
       })
       .catch((e) =>  {
-      setUser({})});
+      setUser(undefined)});
   };
   useEffect(getProfile, []);
   return (
@@ -57,7 +57,7 @@ const Navbar = ({ active }) => {
               </a>
             </li>
             <li className="nav-item">
-              <a href="/saved" className="nav-link disabled">
+              <a href="/saved" className={`nav-link ${user ? "" : "disabled"}`}>
                 Saved
               </a>
             </li>
@@ -76,7 +76,7 @@ const Navbar = ({ active }) => {
           <a href="/profile" className="ms-2 me-2 ">
             <img
               className="rounded-circle wd-avatar-image"
-              src={user.profilePicture || "/images/profile/guest.png"}
+              src={user ? user.profilePicture : "/images/profile/guest.png"}
               alt={"..."}
               width="40px"
               height="40px"
