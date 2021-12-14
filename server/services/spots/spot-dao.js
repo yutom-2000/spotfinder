@@ -10,4 +10,6 @@ const deleteSpot = (spotId) => spotModel.deleteOne({ _id: spotId });
 
 const createSpot = (spot) => spotModel.create(spot);
 
-module.exports = { findAllSpots, findSpotById, deleteSpot, createSpot };
+const findSpotQuery = (query) => spotModel.find(query);
+
+module.exports = { findAllSpots, findSpotById, deleteSpot, createSpot, findSpotQuery };

@@ -49,7 +49,7 @@ const Navbar = ({ active }) => {
             <li className="nav-item">
               <a
                 className={
-                  "nav-link " + (active === "advanced" ? "active" : "")
+                  "nav-link " + (active === "search" ? "active" : "")
                 }
                 href="/search"
               >

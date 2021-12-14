@@ -9,6 +9,7 @@ import Register from "./components/Register/Register";
 import Spots from "./components/Spots";
 import BookMarked from "./components/Bookmarked";
 import Error from "./components/Error";
+import Search from "./components/Search";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path={"/"} element={<Homescreen />} />
           <Route path={"/profile/*"} element={<Profile />}/>
           <Route path={"/login"} element={<Login />} />
+          <Route path={"/search/"} element={<Search />} />
           <Route path={"/register"} element={<Register />}/>
           <Route path={"/spots/*"} element={<Spots />}/>
           <Route path={"profile/saved"} element={<BookMarked/>}/>

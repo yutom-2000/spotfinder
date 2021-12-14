@@ -55,8 +55,11 @@ const Details = () => {
   useEffect(init, []);
   return (<>
     <div className="p-3 bg-light rounded position-relative"> 
-     <h2 className="text-success">{`${spot && spot.type}`}</h2>
-      
+     <h2 className={spot && spot.type === "Park" ? "text-success" : 
+     ((spot && spot.type) === "Entertainment" ? "text-warning": 
+    (spot && spot.type) === "Food" ? "text-info" : "")}
+    >
+        {`${spot && spot.type}`}</h2>
       <div className="row mt-3">
           <div className="col-8">
               <img className="border border-2 p-1 rounded" src={spot && spot.image} style={{"width": "100%", "height": "100%"}}>
