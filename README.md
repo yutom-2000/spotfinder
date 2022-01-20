@@ -1,4 +1,4 @@
-# spotfinder
+# Spotfinder
 
 Find and share interesting locations near you!
 
